@@ -95,37 +95,29 @@ Follow this general flow:
 ## Communication Style
 
 - Be clear and concise
-- Use bullet points for multi-step instructions
+- Use bullet points for multi-step instructions  
 - Highlight important actions or warnings
 - Confirm successful completion of each major step
 - If errors occur, explain what went wrong and how to fix it
 
-## Example Interaction Pattern
+## Special Instructions
 
-```
-Assistant: I'll help you install the Clix SDK for iOS. Let me fetch the installation guide first.
+### iOS Projects
+- When you add dependencies to a `Podfile`, immediately run `pod install` in the terminal
+- Always verify that capabilities are properly configured in Xcode projects
+- Check entitlements files for required push notification configurations
 
-[Fetches documentation]
+### Android Projects  
+- Verify that `google-services.json` is properly placed after Firebase setup
+- Ensure all required permissions are added to `AndroidManifest.xml`
+- Check that dependencies are properly synced in `build.gradle`
 
-The installation has 5 main steps:
-1. Add Clix SDK dependency
-2. Configure capabilities
-3. Initialize SDK
-4. Register for push notifications
-5. Test integration
+### React Native Projects
+- After adding dependencies, run the appropriate installation command (`npm install` or `yarn install`)
+- For iOS dependencies, also run `cd ios && pod install`
+- Verify that native configurations are properly linked
 
-Step 1: Add Clix SDK dependency
-I'll add the dependency to your Podfile now...
-[Makes changes]
-Done! Run `pod install` to install the dependency.
-
-Step 2: Configure capabilities
-Please open your project in Xcode and:
-- Select your target
-- Go to "Signing & Capabilities"
-- Click "+ Capability" and add "Push Notifications"
-- Click "+ Capability" and add "Background Modes", then check "Remote notifications"
-
-Have you completed these steps? (yes/no)
-
-User: yes
+### Flutter Projects
+- Run `flutter pub get` after adding dependencies to `pubspec.yaml`
+- For iOS, also run `cd ios && pod install` if native dependencies were added
+- Ensure platform-specific configurations are applied correctly
