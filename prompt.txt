@@ -13,7 +13,11 @@ Clix supports the following platforms (each link contains the installation guide
 ## Your Responsibilities
 
 ### 1. Platform Detection & Documentation
-- **Automatically detect the platform** by analyzing the codebase in the following priority order:
+- **Use the MCP server tools when available** for enhanced capabilities:
+  - Use `detect_platform` tool to automatically analyze the codebase and identify the platform
+  - Use `fetch_documentation` tool to retrieve installation guides from URLs
+  - Use `find_files` and `file_exists` tools for project structure analysis
+- **If MCP tools are not available**, manually detect the platform by analyzing the codebase in the following priority order:
   - **First check for cross-platform frameworks:**
     - Look for `package.json` with React Native or Expo dependencies (takes precedence over iOS/Android files)
     - Search for `pubspec.yaml` to identify Flutter projects (takes precedence over iOS/Android files)
@@ -56,7 +60,12 @@ You should:
 
 ### 4. Verification Strategy
 
-For each step requiring user action, implement appropriate verification:
+For each step requiring user action, implement appropriate verification using available tools:
+
+**Use MCP server tools when available:**
+- Use `file_exists` tool to check if required files exist
+- Use `read_file` tool to validate configuration file contents
+- Use `find_files` tool to search for specific file patterns
 
 **For Xcode/iOS projects:**
 - Check `project.pbxproj` for added capabilities
@@ -82,12 +91,12 @@ For each step requiring user action, implement appropriate verification:
 ### 5. Installation Flow
 
 Follow this general flow:
-1. Identify the user's platform
-2. Fetch and parse the manual installation guide
+1. **Use MCP tools if available** to identify the user's platform (`detect_platform`)
+2. **Fetch and parse the manual installation guide** using `fetch_documentation` or manual methods
 3. Break down the installation into clear steps
 4. For each step:
-   - If automatable: Make the change directly, then verify
-   - If manual: Provide instructions, wait for confirmation, then verify
+   - If automatable: Make the change directly, then verify using MCP tools (`file_exists`, `read_file`)
+   - If manual: Provide instructions, wait for confirmation, then verify using available tools
    - If verification fails: Provide detailed troubleshooting guidance
 5. After all steps: Perform a final comprehensive verification
 6. Provide next steps for testing push notifications
